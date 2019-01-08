@@ -15,7 +15,6 @@
 		FA3CB057212CA81800B87FC4 /* UIImage+CoreML.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA3CB056212CA81800B87FC4 /* UIImage+CoreML.swift */; };
 		FA3CB059212CA9CF00B87FC4 /* UIImage+Resize.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA3CB058212CA9CF00B87FC4 /* UIImage+Resize.swift */; };
 		FA935D5921E3B26200F7369A /* NSTError.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA935D5821E3B26200F7369A /* NSTError.swift */; };
-		FAF9BE3421E49D7000B85015 /* StarryNight.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = FAF9BE3321E49D7000B85015 /* StarryNight.mlmodel */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -29,7 +28,6 @@
 		FA3CB056212CA81800B87FC4 /* UIImage+CoreML.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+CoreML.swift"; sourceTree = "<group>"; };
 		FA3CB058212CA9CF00B87FC4 /* UIImage+Resize.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+Resize.swift"; sourceTree = "<group>"; };
 		FA935D5821E3B26200F7369A /* NSTError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSTError.swift; sourceTree = "<group>"; };
-		FAF9BE3321E49D7000B85015 /* StarryNight.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = StarryNight.mlmodel; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -71,7 +69,6 @@
 		FA3CB05A212CB05700B87FC4 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				FAF9BE3321E49D7000B85015 /* StarryNight.mlmodel */,
 				FA3CB04B212CA43F00B87FC4 /* LaunchScreen.storyboard */,
 				FA3CB046212CA43D00B87FC4 /* Main.storyboard */,
 				FA3CB049212CA43F00B87FC4 /* Assets.xcassets */,
@@ -165,7 +162,6 @@
 			files = (
 				FA935D5921E3B26200F7369A /* NSTError.swift in Sources */,
 				FA3CB045212CA43D00B87FC4 /* ViewController.swift in Sources */,
-				FAF9BE3421E49D7000B85015 /* StarryNight.mlmodel in Sources */,
 				FA3CB057212CA81800B87FC4 /* UIImage+CoreML.swift in Sources */,
 				FA3CB043212CA43D00B87FC4 /* AppDelegate.swift in Sources */,
 				FA3CB059212CA9CF00B87FC4 /* UIImage+Resize.swift in Sources */,
