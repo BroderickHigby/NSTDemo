@@ -26,6 +26,7 @@ import Foundation
 
 public enum NSTError : Error {
     case unknown
+    case notImplemented
     case resizeError
     case pixelBufferError
     case predictionError
@@ -35,7 +36,9 @@ extension NSTError: LocalizedError {
     public var errorDescription: String? {
         switch self {
         case .unknown:
-            return "Unknown error"
+            return "Unkown error"
+        case .notImplemented:
+            return "Need implementation"
         case .resizeError:
             return "Resizing failed"
         case .pixelBufferError:

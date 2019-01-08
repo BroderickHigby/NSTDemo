@@ -60,46 +60,10 @@ class ViewController: UIViewController {
     
     func process(input: UIImage, completion: @escaping FilteringCompletion) {
         
-        // Initialize the NST model
-        let model = StarryNight()
+        // TODO
         
-        // Next steps are pretty heavy, better process them on another thread
-        DispatchQueue.global().async {
-
-            // 1 - Resize our input image
-            guard let inputImage = input.resizeCG(size: CGSize(width: 720, height: 720)) else {
-                completion(nil, NSTError.resizeError)
-                return
-            }
-
-            // 2 - Transform our UIImage to a PixelBuffer of appropriate size
-            guard let cvBufferInput = inputImage.pixelBuffer() else {
-                completion(nil, NSTError.pixelBufferError)
-                return
-            }
-
-            // 3 - Feed that PixelBuffer to the model (this is where the actual magic happens)
-            guard let output = try? model.prediction(inputImage: cvBufferInput) else {
-                completion(nil, NSTError.predictionError)
-                return
-            }
-
-            // 4 - Transform PixelBuffer output to UIImage
-            guard let outputImage = UIImage(pixelBuffer: output.outputImage) else {
-                completion(nil, NSTError.pixelBufferError)
-                return
-            }
-
-            // 5 - Resize result back to the original input size
-            guard let finalImage = outputImage.resizeCG(size: input.size) else {
-                completion(nil, NSTError.resizeError)
-                return
-            }
-
-            // 6 - Hand result to main thread
-            DispatchQueue.main.async {
-                completion(finalImage, nil)
-            }
+        DispatchQueue.main.async {
+            completion(nil, NSTError.notImplemented)
         }
     }
     
@@ -129,7 +93,7 @@ class ViewController: UIViewController {
             if let filteredImage = filteredImage {
                 self.imageView.image = filteredImage
             } else if let error = error {
-                print(error.localizedDescription)
+                self.applyButton.setTitle(error.localizedDescription, for: .normal)
             } else {
                 print(NSTError.unknown.localizedDescription)
             }
