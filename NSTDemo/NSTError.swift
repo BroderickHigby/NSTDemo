@@ -28,7 +28,8 @@ public enum NSTError : Error {
     case unknown
     case notImplemented
     case resizeError
-    case pixelBufferError
+    case imageToPixelBufferFailed
+    case pixelBufferToImageFailed
     case predictionError
 }
 
@@ -41,8 +42,10 @@ extension NSTError: LocalizedError {
             return "Need implementation"
         case .resizeError:
             return "Resizing failed"
-        case .pixelBufferError:
-            return "Pixel Buffer conversion failed"
+        case .imageToPixelBufferFailed:
+            return "Failed to convert image to pixel buffer"
+        case .pixelBufferToImageFailed:
+            return "Failed to convert pixel buffer to image"
         case .predictionError:
             return "CoreML prediction failed"
         }
