@@ -75,6 +75,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="applyButton" destination="3jt-HQ-rPo" id="Z79-aj-dnv"/>
+                        <outlet property="buttonHolderView" destination="YX4-Cv-i6l" id="XPR-dT-s3c"/>
                         <outlet property="imageView" destination="buZ-WT-rci" id="GOy-uX-dYo"/>
                         <outlet property="loader" destination="kM4-2n-YLF" id="lvF-z8-pIP"/>
                         <outlet property="loaderWidthConstraint" destination="bUb-si-Era" id="d2p-92-0Y1"/>

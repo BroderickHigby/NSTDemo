@@ -26,6 +26,7 @@ import Foundation
 
 public enum NSTError : Error {
     case unknown
+    case libraryUnavailable
     case notImplemented
     case resizeError
     case imageToPixelBufferFailed
@@ -38,6 +39,8 @@ extension NSTError: LocalizedError {
         switch self {
         case .unknown:
             return "Unkown error"
+        case .libraryUnavailable:
+            return "Library unavailable"
         case .notImplemented:
             return "Need implementation"
         case .resizeError:

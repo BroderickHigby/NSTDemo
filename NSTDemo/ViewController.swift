@@ -28,13 +28,14 @@ class ViewController: UIViewController {
     
     typealias FilteringCompletion = ((UIImage?, Error?) -> ())
     
-    @IBOutlet var imageView: UIImageView!
-    @IBOutlet var loader: UIActivityIndicatorView!
-    @IBOutlet var applyButton: UIButton!
-    @IBOutlet var loaderWidthConstraint: NSLayoutConstraint!
+    @IBOutlet private var imageView: UIImageView!
+    @IBOutlet private var loader: UIActivityIndicatorView!
+    @IBOutlet private var buttonHolderView: UIView!
+    @IBOutlet private var applyButton: UIButton!
+    @IBOutlet private var loaderWidthConstraint: NSLayoutConstraint!
     
-    var imagePicker = UIImagePickerController()
-    var isProcessing : Bool = false {
+    private var imagePicker = UIImagePickerController()
+    private var isProcessing : Bool = false {
         didSet {
             self.applyButton.isEnabled = !isProcessing
             self.isProcessing ? self.loader.startAnimating() : self.loader.stopAnimating()
@@ -56,9 +57,9 @@ class ViewController: UIViewController {
         self.applyButton.superview!.layer.cornerRadius = 4
     }
     
-    //MARK:- CoreML
+    //MARK: - CoreML
     
-    func process(input: UIImage, completion: @escaping FilteringCompletion) {
+    private func process(input: UIImage, completion: @escaping FilteringCompletion) {
         
         // TODO
         
@@ -67,19 +68,8 @@ class ViewController: UIViewController {
         }
     }
     
-    //MARK:- Actions
-    
-    @IBAction func importFromLibrary() {
-        if UIImagePickerController.isSourceTypeAvailable(.photoLibrary) {
-            self.imagePicker.delegate = self
-            self.imagePicker.sourceType = .photoLibrary
-            self.imagePicker.allowsEditing = false
-            self.present(self.imagePicker, animated: true)
-        } else {
-            print("Photo Library not available")
-        }
-    }
-    
+    //MARK: - Actions
+
     @IBAction func applyNST() {
         
         guard let image = self.imageView.image else {
@@ -93,17 +83,41 @@ class ViewController: UIViewController {
             if let filteredImage = filteredImage {
                 self.imageView.image = filteredImage
             } else if let error = error {
-                self.applyButton.setTitle(error.localizedDescription, for: .normal)
+                self.showError(error)
             } else {
                 print(NSTError.unknown.localizedDescription)
             }
         }
     }
+    
+    
+    //MARK: - Utils
+    func showError(_ error: Error) {
+        
+        self.buttonHolderView.backgroundColor = UIColor(red: 220/255, green: 50/255, blue: 50/255, alpha: 1)
+        self.applyButton.setTitle(error.localizedDescription, for: .normal)
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) { // Change `2.0` to the desired number of seconds.
+            self.applyButton.setTitle("Apply Style", for: .normal)
+            self.buttonHolderView.backgroundColor = UIColor(red: 5/255, green: 122/255, blue: 255/255, alpha: 1)
+        }
+    }
 }
 
-// MARK: - UIImagePickerControllerDelegate
+// MARK: - UIImagePickerController
 
 extension ViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    
+    @IBAction func importFromLibrary() {
+        if UIImagePickerController.isSourceTypeAvailable(.photoLibrary) {
+            self.imagePicker.delegate = self
+            self.imagePicker.sourceType = .photoLibrary
+            self.imagePicker.allowsEditing = false
+            self.present(self.imagePicker, animated: true)
+        } else {
+            self.showError(NSTError.libraryUnavailable)
+        }
+    }
     
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         self.dismiss(animated: true)
